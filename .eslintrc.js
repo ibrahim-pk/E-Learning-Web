@@ -1,31 +1,27 @@
+
 module.exports = {
-    extends: 'react-app',
-    overrides: [
-      {
-        files: ['**/*.ts', '**/*.tsx'],
-        parser: '@typescript-eslint/parser',
+overrides: [
+    {
+        files: [ "**/*.ts?(x)" ],
+        parser: "@typescript-eslint/parser",
         parserOptions: {
-          ecmaVersion: 2018,
-          sourceType: 'module',
-          ecmaFeatures: {
-            jsx: true,
-          },
-          warnOnUnsupportedTypeScriptVersion: true,
+            ecmaFeatures: {
+                jsx: true
+            },
+            ecmaVersion: 2018,
+            sourceType: "module"
         },
-        plugins: ['@typescript-eslint'],
+        plugins: [
+            "@typescript-eslint"
+        ],
+        // You can add Typescript specific rules here.
+        // If you are adding the typescript variant of a rule which is there in the javascript
+        // ruleset, disable the JS one.
         rules: {
-          'default-case': 'off',
-          'no-dupe-class-members': 'off',
-          '@typescript-eslint/no-angle-bracket-type-assertion': 'warn',
-          'no-array-constructor': 'off',
-          '@typescript-eslint/no-array-constructor': 'warn',
-          '@typescript-eslint/no-namespace': 'error',
-          'no-unused-vars': 'off',
-          '@typescript-eslint/no-unused-vars': ['warn', { args: 'none', ignoreRestSiblings: true }],
-          'no-useless-constructor': 'off',
-          '@typescript-eslint/no-useless-constructor': 'warn',
-        },
-      },
-    ],
-  };
-  
+            "@typescript-eslint/no-array-constructor": "warn",
+            "no-array-constructor": "off"
+        }
+    }
+]
+
+}

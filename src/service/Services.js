@@ -34,7 +34,7 @@ const Services = () => {
           <div className="row">
             <div className="col">
               <div className="page-banner text-center">
-                <h1>ALL COURSES</h1>
+                <h3>ALL COURSES</h3>
               </div>
             </div>
           </div>
