@@ -33,8 +33,8 @@ const Services = () => {
         <div className="container">
           <div className="row">
             <div className="col">
-              <div className="page-banner text-center">
-                <h3>ALL COURSES</h3>
+              <div className="page-banner text-white text-center">
+                <h1>ALL COURSES</h1>
               </div>
             </div>
           </div>

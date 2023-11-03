@@ -165,7 +165,7 @@ class Login extends Component {
                       Reset
                     </a>
                   </p> */}
-                  <p className="mb-0 text-muted">
+                  {/* <p className="mb-0 text-muted">
                     Don’t have an account?{" "}
                     <a
                       href={`${process.env.PUBLIC_URL}/register/`+this.props.match.params.role}
@@ -173,7 +173,7 @@ class Login extends Component {
                     >
                       Signup
                     </a>
-                  </p>
+                  </p> */}
                 </div>
               </div>
               <div className="col-md-6 d-none d-md-block">

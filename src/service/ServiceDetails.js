@@ -40,6 +40,7 @@ function CourseDetails() {
   const [userRole, setUserRole] = useState(JSON.parse(localStorage.getItem("userRole"))
   );
   const [enrolled, setEnrolled] = useState("ADD TO COURSE LIST");
+  const [enrolledBtn, setEnrolledBtn] = useState(false);
   const [buttonClass, setButtonClass] = useState("btn btn-success");
   const [data, setData] = useState([]);
   const [addCourse, setAddCourse] = useState(false);
@@ -98,6 +99,7 @@ function CourseDetails() {
         if (responseEnrolled?.data) {
           setEnrolled("ALREADY ENROLLED");
           setButtonClass("btn btn-danger");
+          setEnrolledBtn(true)
         }
         //console.log(response)
       } catch (error) {
@@ -130,7 +132,14 @@ function CourseDetails() {
             <p>{data[0]?.courseDescription}</p>
             <div>
               <ToastContainer />
-              <button
+              {
+                enrolledBtn?<button
+                type="button"
+                style={addCourse ? {} : { display: "none" }}
+                className={buttonClass}
+              >
+                {enrolled}
+              </button>:<button
                 type="button"
                 style={addCourse ? {} : { display: "none" }}
                 className={buttonClass}
@@ -138,6 +147,7 @@ function CourseDetails() {
               >
                 {enrolled}
               </button>
+              }
             </div>
 
             {/* Instructor Details */}
