@@ -36,17 +36,18 @@ const Services = (props) => {
             </h3> */}
             <div className="container mt-5">
               <div className="card">
-              <img
-              src={
-                val.banner && val.banner.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)
-                  ? `https://drive.google.com/uc?id=${
-                      val.banner.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)[1]
-                    }`
-                  : "" // Provide a default value or handle the case when val?.banner is null or doesn't match the expected pattern
-              }
-              className="card-img-top"
-              alt="Product Image"
-            />
+                <img
+                  src={
+                    val?.banner &&
+                    val.banner.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)
+                      ? `https://drive.google.com/uc?id=${
+                          val.banner.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)[1]
+                        }`
+                      : "" // Provide a default value or handle the case when val?.banner is null or doesn't match the expected pattern
+                  }
+                  className="card-img-top"
+                  alt="Product Image"
+                />
                 <div className="card-body">
                   <h4 className="card-title">{val?.course?.courseName}</h4>
                   <Link
