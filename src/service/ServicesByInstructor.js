@@ -43,9 +43,14 @@ const match = googleDriveLink.match(/\/file\/d\/(.+?)\//); */}
             <div className="container mt-5">
               <div className="card">
                 <img
-                  src={`https://drive.google.com/uc?id=${
-                    val?.banner?.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)[1]
-                  }`}
+                  src={
+                    val?.banner &&
+                    val.banner.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)
+                      ? `https://drive.google.com/uc?id=${
+                          val.banner.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)[1]
+                        }`
+                      : "" // Provide a default value or handle the case when val?.banner is null or doesn't match the expected pattern
+                  }
                   className="card-img-top"
                   alt="Product Image"
                 />

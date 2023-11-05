@@ -12,7 +12,9 @@ const Services = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://pedu-ibrahimecste.vercel.app/courses");
+        const response = await axios.get(
+          "https://pedu-ibrahimecste.vercel.app/courses"
+        );
         setData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -62,23 +64,41 @@ const Services = () => {
                               <div className="container mt-5">
                                 <div className="card">
                                   <img
-                                    src={`https://drive.google.com/uc?id=${
-                                      val?.banner?.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)[1]
-                                    }`}
+                                    src={
+                                      val?.banner &&
+                                      val.banner.match(
+                                        /\/file\/d\/([a-zA-Z0-9_-]+)/
+                                      )
+                                        ? `https://drive.google.com/uc?id=${
+                                            val.banner.match(
+                                              /\/file\/d\/([a-zA-Z0-9_-]+)/
+                                            )[1]
+                                          }`
+                                        : "" // Provide a default value or handle the case when val?.banner is null or doesn't match the expected pattern
+                                    }
                                     className="card-img-top"
                                     alt="Product Image"
                                   />
                                   <div className="card-body">
-                                    <h4 className="card-title">{val.courseName}</h4>
-                                    <h6 className="card-text">{val.newPrice}Tk</h6>
+                                    <h4 className="card-title">
+                                      {val.courseName}
+                                    </h4>
+                                    <h6 className="card-text">
+                                      {val.newPrice}Tk
+                                    </h6>
                                     <p>
                                       <del>{val.oldPrice}</del>
                                     </p>
                                     <p className="card-text">
-                                      Rating: <span className="badge badge-primary">2</span>
+                                      Rating:{" "}
+                                      <span className="badge badge-primary">
+                                        2
+                                      </span>
                                     </p>
                                     <a href="#" className="btn btn-primary">
-                                      <Link to={`${process.env.PUBLIC_URL}/services/details/${val._id}`}>
+                                      <Link
+                                        to={`${process.env.PUBLIC_URL}/services/details/${val._id}`}
+                                      >
                                         Details
                                       </Link>
                                     </a>

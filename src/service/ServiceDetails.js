@@ -37,7 +37,8 @@ function CourseDetails() {
   //   };
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("userid")));
-  const [userRole, setUserRole] = useState(JSON.parse(localStorage.getItem("userRole"))
+  const [userRole, setUserRole] = useState(
+    JSON.parse(localStorage.getItem("userRole"))
   );
   const [enrolled, setEnrolled] = useState("ADD TO COURSE LIST");
   const [enrolledBtn, setEnrolledBtn] = useState(false);
@@ -45,11 +46,7 @@ function CourseDetails() {
   const [data, setData] = useState([]);
   const [addCourse, setAddCourse] = useState(false);
 
-
-
   const { id } = useParams();
-
- 
 
   const onClick = (e) => {
     e.preventDefault();
@@ -65,7 +62,10 @@ function CourseDetails() {
 
     if (buttonClass === "btn btn-success") {
       axios
-        .post("https://pedu-ibrahimecste.vercel.app/enrollbystudent/add", newTodo)
+        .post(
+          "https://pedu-ibrahimecste.vercel.app/enrollbystudent/add",
+          newTodo
+        )
         .then((result) => {
           toast.success("Added successfully");
         })
@@ -79,7 +79,7 @@ function CourseDetails() {
   };
 
   useEffect(() => {
-     if (userRole === "student") {
+    if (userRole === "student") {
       setAddCourse(true);
     }
     const fetchData = async () => {
@@ -89,17 +89,16 @@ function CourseDetails() {
         );
         setData(response.data);
 
-
         const responseEnrolled = await axios.get(
           `https://pedu-ibrahimecste.vercel.app/checkenrollment?id=${user}&&courseid=${id}`
         );
-        
+
         //console.log(responseEnrolled)
-        
+
         if (responseEnrolled?.data) {
           setEnrolled("ALREADY ENROLLED");
           setButtonClass("btn btn-danger");
-          setEnrolledBtn(true)
+          setEnrolledBtn(true);
         }
         //console.log(response)
       } catch (error) {
@@ -118,11 +117,15 @@ function CourseDetails() {
           {/* Left side - Course Banner */}
           <div className="col-md-4">
             <img
-              src={`https://drive.google.com/uc?id=${
-                data[0]?.banner?.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)[1]
-              }`}
-              alt="Course Banner"
-              className="img-fluid"
+              src={
+                data[0]?.banner && data[0].banner.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)
+                  ? `https://drive.google.com/uc?id=${
+                      data[0].banner.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)[1]
+                    }`
+                  : "" // Provide a default value or handle the case when val?.banner is null or doesn't match the expected pattern
+              }
+              className="card-img-top"
+              alt="Product Image"
             />
           </div>
           {/* Right side - Course Details, Instructor Details, and Reviews */}
@@ -132,22 +135,24 @@ function CourseDetails() {
             <p>{data[0]?.courseDescription}</p>
             <div>
               <ToastContainer />
-              {
-                enrolledBtn?<button
-                type="button"
-                style={addCourse ? {} : { display: "none" }}
-                className={buttonClass}
-              >
-                {enrolled}
-              </button>:<button
-                type="button"
-                style={addCourse ? {} : { display: "none" }}
-                className={buttonClass}
-                onClick={onClick}
-              >
-                {enrolled}
-              </button>
-              }
+              {enrolledBtn ? (
+                <button
+                  type="button"
+                  style={addCourse ? {} : { display: "none" }}
+                  className={buttonClass}
+                >
+                  {enrolled}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  style={addCourse ? {} : { display: "none" }}
+                  className={buttonClass}
+                  onClick={onClick}
+                >
+                  {enrolled}
+                </button>
+              )}
             </div>
 
             {/* Instructor Details */}

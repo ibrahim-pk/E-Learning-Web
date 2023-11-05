@@ -12,7 +12,8 @@ const Services = (props) => {
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-        "https://pedu-ibrahimecste.vercel.app/enrollmentbystudent?id=" + props.match.params.id
+        "https://pedu-ibrahimecste.vercel.app/enrollmentbystudent?id=" +
+          props.match.params.id
       );
 
       setData(response.data);
@@ -25,7 +26,6 @@ const Services = (props) => {
     <div className="col-lg-4 col-md-6 col-12 section-space--bottom--30" key={i}>
       <div className="service-grid-item">
         <div className="service-grid-item__image">
-          
           <div className="service-grid-item__content">
             {/* <h3 className="title">
               <a
@@ -34,29 +34,30 @@ const Services = (props) => {
                 
               </a>
             </h3> */}
-           <div className="container mt-5">
-                  <div className="card">
-                    <img
-                      src={`https://drive.google.com/uc?id=${
-                        val?.course?.banner?.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)[1]
-                      }`}
-                      className="card-img-top"
-                      alt="Product Image"
-                    />
-                    <div className="card-body">
-                      <h4 className="card-title">{val?.course?.courseName}</h4>
-                        <Link
-                          className="btn btn-primary"
-                          to={`${process.env.PUBLIC_URL}/blog-details-left-sidebar/${val.course._id}`}
-                        >
-                          Watch
-                        </Link>
-                     
-                    </div>
-                  </div>
+            <div className="container mt-5">
+              <div className="card">
+              <img
+              src={
+                val.banner && val.banner.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)
+                  ? `https://drive.google.com/uc?id=${
+                      val.banner.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)[1]
+                    }`
+                  : "" // Provide a default value or handle the case when val?.banner is null or doesn't match the expected pattern
+              }
+              className="card-img-top"
+              alt="Product Image"
+            />
+                <div className="card-body">
+                  <h4 className="card-title">{val?.course?.courseName}</h4>
+                  <Link
+                    className="btn btn-primary"
+                    to={`${process.env.PUBLIC_URL}/blog-details-left-sidebar/${val.course._id}`}
+                  >
+                    Watch
+                  </Link>
                 </div>
-
-
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -91,11 +92,17 @@ const Services = (props) => {
             <div className="row">
               <div className="col-lg-12">
                 <div className="service-item-wrapper">
-                  {
-                    data.length>0?<div className="row">{Datalist}</div>:<h3 style={{
-                      textAlign:'center'
-                    }}>No Course Buy!</h3>
-                  }
+                  {data.length > 0 ? (
+                    <div className="row">{Datalist}</div>
+                  ) : (
+                    <h3
+                      style={{
+                        textAlign: "center",
+                      }}
+                    >
+                      No Course Buy!
+                    </h3>
+                  )}
                 </div>
               </div>
             </div>
